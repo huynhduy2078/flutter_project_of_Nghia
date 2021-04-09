@@ -50,14 +50,15 @@ class _HomePageState extends State<HomePage> {
           width: double.infinity,
           height: 40,
           decoration: BoxDecoration(
-              color: grey, borderRadius: BorderRadius.circular(15)),
+              color: CommonColors.grey,
+              borderRadius: BorderRadius.circular(15)),
           child: TextField(
-            cursorColor: black,
+            cursorColor: CommonColors.black,
             controller: _searchController,
             decoration: InputDecoration(
                 prefixIcon: Icon(
                   LineIcons.search,
-                  color: black.withOpacity(0.5),
+                  color: CommonColors.black.withOpacity(0.5),
                 ),
                 hintText: "Search",
                 border: InputBorder.none),
@@ -72,55 +73,69 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Padding(
                 padding: EdgeInsets.only(right: 20),
-                              child: Column(
+                child: Column(
                   children: <Widget>[
                     Container(
-                  width: 70,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: grey
-                  ),
-                  child: Center(
-                    child: Icon(LineIcons.plus,size: 33,),
-                  ),
-                ),
-                SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    width: 75,
-                    child: Align(
-                        child: Text(
-                      'Your Story',
-                      overflow: TextOverflow.ellipsis,
-                    )),
-                  )
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: CommonColors.grey),
+                      child: Center(
+                        child: Icon(
+                          LineIcons.plus,
+                          size: 33,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    SizedBox(
+                      width: 75,
+                      child: Align(
+                          child: Text(
+                        'Your Story',
+                        overflow: TextOverflow.ellipsis,
+                      )),
+                    )
                   ],
                 ),
               ),
               Row(
-              children: List.generate(userStories.length, (index) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 20),
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    width: 75,
-                    height: 75,
-                    child: Stack(
-                      children: <Widget>[
-                        userStories[index]['story']
-                            ? Container(
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                        color: blue_story, width: 3)),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(3.0),
-                                  child: Container(
-                                    width: 75,
-                                    height: 75,
+                  children: List.generate(userStories.length, (index) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        width: 75,
+                        height: 75,
+                        child: Stack(
+                          children: <Widget>[
+                            userStories[index]['story']
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                            color: CommonColors.blue_story,
+                                            width: 3)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Container(
+                                        width: 75,
+                                        height: 75,
+                                        decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            image: DecorationImage(
+                                                image: NetworkImage(
+                                                    userStories[index]['img']),
+                                                fit: BoxFit.cover)),
+                                      ),
+                                    ),
+                                  )
+                                : Container(
+                                    width: 70,
+                                    height: 70,
                                     decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                         image: DecorationImage(
@@ -128,52 +143,40 @@ class _HomePageState extends State<HomePage> {
                                                 userStories[index]['img']),
                                             fit: BoxFit.cover)),
                                   ),
-                                ),
-                              )
-                            : Container(
-                                width: 70,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    image: DecorationImage(
-                                        image:
-                                            NetworkImage(userStories[index]['img']),
-                                        fit: BoxFit.cover)),
-                              ),
-                        userStories[index]['online']
-                            ? Positioned(
-                                top: 48,
-                                left: 52,
-                                child: Container(
-                                  width: 20,
-                                  height: 20,
-                                  decoration: BoxDecoration(
-                                      color: online,
-                                      shape: BoxShape.circle,
-                                      border:
-                                          Border.all(color: white, width: 3)),
-                                ),
-                              )
-                            : Container()
-                      ],
-                    ),
+                            userStories[index]['online']
+                                ? Positioned(
+                                    top: 48,
+                                    left: 52,
+                                    child: Container(
+                                      width: 20,
+                                      height: 20,
+                                      decoration: BoxDecoration(
+                                          color: CommonColors.online,
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                              color: CommonColors.white,
+                                              width: 3)),
+                                    ),
+                                  )
+                                : Container()
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      SizedBox(
+                        width: 75,
+                        child: Align(
+                            child: Text(
+                          userStories[index]['name'],
+                          overflow: TextOverflow.ellipsis,
+                        )),
+                      )
+                    ],
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  SizedBox(
-                    width: 75,
-                    child: Align(
-                        child: Text(
-                      userStories[index]['name'],
-                      overflow: TextOverflow.ellipsis,
-                    )),
-                  )
-                ],
-              ),
-            );
-          }
-          ))
+                );
+              }))
             ],
           ),
         ),
@@ -183,10 +186,11 @@ class _HomePageState extends State<HomePage> {
         Column(
           children: List.generate(userMessages.length, (index) {
             return InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (_) => ChatDetailPage()));
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (_) => ChatDetailPage()));
               },
-                          child: Padding(
+              child: Padding(
                 padding: const EdgeInsets.only(bottom: 20),
                 child: Row(
                   children: <Widget>[
@@ -200,7 +204,8 @@ class _HomePageState extends State<HomePage> {
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                          color: blue_story, width: 3)),
+                                          color: CommonColors.blue_story,
+                                          width: 3)),
                                   child: Padding(
                                     padding: const EdgeInsets.all(3.0),
                                     child: Container(
@@ -221,8 +226,8 @@ class _HomePageState extends State<HomePage> {
                                   decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
-                                          image:
-                                              NetworkImage(userMessages[index]['img']),
+                                          image: NetworkImage(
+                                              userMessages[index]['img']),
                                           fit: BoxFit.cover)),
                                 ),
                           userMessages[index]['online']
@@ -233,10 +238,11 @@ class _HomePageState extends State<HomePage> {
                                     width: 20,
                                     height: 20,
                                     decoration: BoxDecoration(
-                                        color: online,
+                                        color: CommonColors.online,
                                         shape: BoxShape.circle,
-                                        border:
-                                            Border.all(color: white, width: 3)),
+                                        border: Border.all(
+                                            color: CommonColors.white,
+                                            width: 3)),
                                   ),
                                 )
                               : Container()
@@ -259,13 +265,14 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SizedBox(
                           width: MediaQuery.of(context).size.width - 135,
-                                                child: Text(
-                                                  
-                            userMessages[index]['message'] +" - "+userMessages[index]['created_at'],
+                          child: Text(
+                            userMessages[index]['message'] +
+                                " - " +
+                                userMessages[index]['created_at'],
                             style: TextStyle(
-                                fontSize: 15, color: black.withOpacity(0.8)
-                                ),
-                                overflow: TextOverflow.ellipsis,
+                                fontSize: 15,
+                                color: CommonColors.black.withOpacity(0.8)),
+                            overflow: TextOverflow.ellipsis,
                           ),
                         )
                       ],

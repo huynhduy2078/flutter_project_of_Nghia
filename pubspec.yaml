@@ -23,6 +23,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  scrollable_positioned_list: ^0.1.7
+  custom_pop_up_menu: ^1.2.0
+  rect_getter: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
