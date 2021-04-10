@@ -148,15 +148,16 @@ class _HomePageState extends State<HomePage> {
                                     top: 48,
                                     left: 52,
                                     child: Container(
-                                      width: 20,
-                                      height: 20,
-                                      decoration: BoxDecoration(
-                                          color: CommonColors.online,
-                                          shape: BoxShape.circle,
-                                          border: Border.all(
-                                              color: CommonColors.white,
-                                              width: 3)),
-                                    ),
+                                        width: 20,
+                                        height: 20,
+                                        decoration: BoxDecoration(
+                                            color: CommonColors.online,
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                                color: CommonColors.white,
+                                                width: 3)),
+                                      ),
+                                    
                                   )
                                 : Container()
                           ],

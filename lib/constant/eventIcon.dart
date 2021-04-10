@@ -1,35 +1,39 @@
-import 'package:flutter/material.dart';
-
 // list of Icon
 List listEventIcon = [
   {
     "id": 1,
-    "icon": Icons.content_copy,
-    "name": "content_copy",
+    "iconGif": "images/like.gif",
+    "iconPng": "images/ic_like_fill.png",
+    "name": "like",
   },
   {
     "id": 2,
-    "icon": Icons.send,
-    "name": "send",
+    "iconGif": "images/love.gif",
+    "iconPng": "images/love2.png",
+    "name": "love",
   },
   {
     "id": 3,
-    "icon": Icons.collections,
-    "name": "collections",
+    "iconGif": "images/haha.gif",
+    "iconPng": "images/haha2.png",
+    "name": "haha",
   },
   {
     "id": 4,
-    "icon": Icons.delete,
-    "name": "delete",
+    "iconGif": "images/wow.gif",
+    "iconPng": "images/wow2.png",
+    "name": "wow",
   },
   {
     "id": 5,
-    "icon": Icons.collections,
-    "name": "collections",
+    "iconGif": "images/sad.gif",
+    "iconPng": "images/sad2.png",
+    "name": "like",
   },
   {
     "id": 6,
-    "icon": Icons.delete,
-    "name": "delete",
+    "iconGif": "images/angry.gif",
+    "iconPng": "images/angry2.png",
+    "name": "angry",
   },
 ];

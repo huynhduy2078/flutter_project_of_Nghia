@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:chat_messanger_ui/constant/eventIcon.dart';
 import 'package:chat_messanger_ui/constant/eventMessage.dart';
 import 'package:chat_messanger_ui/constant/data.dart';
 import 'package:chat_messanger_ui/theme/colors.dart';
+import 'package:chat_messanger_ui/widget/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ChatDetailPage extends StatefulWidget {
   @override
@@ -13,7 +16,9 @@ class ChatDetailPage extends StatefulWidget {
 
 class _ChatDetailPageState extends State<ChatDetailPage> {
   TextEditingController _sendMessageController = new TextEditingController();
-  List menuItems = [];
+
+  get id => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -196,6 +201,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
         padding: EdgeInsets.only(right: 20, left: 20, top: 20, bottom: 80),
         children: List.generate(messages.length, (index) {
           return ChatBubble(
+            id: messages[index]['idMessage'],
             isMe: messages[index]['isMe'],
             messageType: messages[index]['messageType'],
             message: messages[index]['message'],
@@ -209,22 +215,23 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
 }
 
 class ChatBubble extends StatelessWidget {
+  final String id;
   final bool isMe;
   final String profileImg;
   final String message;
   final int messageType;
   final bool icon;
 
-  const ChatBubble({
-    Key key,
-    this.isMe,
-    this.profileImg,
-    this.message,
-    this.messageType,
-    this.icon,
-  }) : super(key: key);
+  const ChatBubble(
+      {Key key,
+      this.id,
+      this.isMe,
+      this.profileImg,
+      this.message,
+      this.messageType,
+      this.icon})
+      : super(key: key);
 
-  @override
   Widget build(BuildContext context) {
     if (isMe) {
       return Container(
@@ -240,10 +247,16 @@ class ChatBubble extends StatelessWidget {
                     child: Row(
                       children: [
                         CustomPopupMenu(
-                          verticalMargin: -5.0,
-                          menuBuilder: _buildLongPressMenu,
                           barrierColor: CommonColors.transparent,
                           pressType: PressType.longPress,
+                          showArrow: false,
+                          listEventIcon: listEventIcon,
+                          onChangeIcon: (int value) {
+                            print(value);
+                          },
+                          onShowIcon: (bool value) {
+                            //isShowIcon = true;
+                          },
                           child: Container(
                             constraints: BoxConstraints(
                                 minWidth: 50,
@@ -330,31 +343,30 @@ class ChatBubble extends StatelessWidget {
                 child: Flexible(
                   child: Stack(
                     children: <Widget>[
-                      CustomPopupMenu(
-                        verticalMargin: -5.0,
-                        menuBuilder: _buildLongPressMenu,
-                        barrierColor: CommonColors.transparent,
-                        pressType: PressType.longPress,
-                        child: Container(
-                          constraints: BoxConstraints(
-                              minWidth: 50,
-                              maxWidth:
-                                  (MediaQuery.of(context).size.width * 0.7)),
-                          decoration: BoxDecoration(
-                              color: CommonColors.white,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(15))),
-                          child: Padding(
-                            padding: const EdgeInsets.all(13.0),
-                            child: Text(
-                              message,
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                  color: CommonColors.black, fontSize: 16),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // CustomPopupMenu(
+                      //   verticalMargin: -5.0,
+                      //   barrierColor: CommonColors.transparent,
+                      //   pressType: PressType.longPress,
+                      //   child: Container(
+                      //     constraints: BoxConstraints(
+                      //         minWidth: 50,
+                      //         maxWidth:
+                      //             (MediaQuery.of(context).size.width * 0.7)),
+                      //     decoration: BoxDecoration(
+                      //         color: CommonColors.white,
+                      //         borderRadius:
+                      //             BorderRadius.all(Radius.circular(15))),
+                      //     child: Padding(
+                      //       padding: const EdgeInsets.all(13.0),
+                      //       child: Text(
+                      //         message,
+                      //         textAlign: TextAlign.justify,
+                      //         style: TextStyle(
+                      //             color: CommonColors.black, fontSize: 16),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       icon == true
                           ? Positioned.fill(
                               child: Align(
@@ -395,84 +407,28 @@ class ChatBubble extends StatelessWidget {
     }
   }
 
-  Widget _buildLongPressMenu() {
-    return ClipRRect(
-      child: Container(
-        width: 200,
-        //color: const Color(0xFF4C4C4C),
-        color: CommonColors.transparent,
-        child: Column(
-          children: [
-            Container(
-              height: 40,
-              decoration: BoxDecoration(
-                color: CommonColors.bg_event_action,
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              child: GridView.count(
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-                crossAxisCount: 5,
-                crossAxisSpacing: 0,
-                mainAxisSpacing: 0,
-                shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
-                children: listEventIcon
-                    .map((item) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: <Widget>[
-                            Icon(
-                              item['icon'],
-                              size: 20,
-                              color: CommonColors.white,
-                            ),
-                          ],
-                        ))
-                    .toList(),
-              ),
-            ),
-            SizedBox(
-              height: 5,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: RadialGradient(colors: [
-                  CommonColors.grey,
-                  CommonColors.black,
-                ], radius: 0.85, focal: Alignment.center),
-              ),
-              child: GridView(
-                shrinkWrap: true,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 2,
-                  mainAxisSpacing: 2,
-                  crossAxisCount: 3,
-                  childAspectRatio: 2,
-                ),
-                physics: NeverScrollableScrollPhysics(),
-                children: listEventAction
-                    .map((item) => Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            gradient: RadialGradient(colors: [
-                              CommonColors.bg_event_action,
-                              CommonColors.bg_event_action,
-                            ], radius: 0.1, focal: Alignment.center),
-                          ),
-                          alignment: Alignment.center,
-                          child: Text(
-                            item['title'],
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: CommonColors.white, fontSize: 12),
-                          ),
-                        ))
-                    .toList(),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
   }
 }
+
+// class CustomPopupMenuController extends ChangeNotifier {
+//   bool menuIsShowing = false;
+
+//   Future<void> showMenu() async {
+//    print("show");
+//    SharedPreferences prefs = await SharedPreferences.getInstance();
+//    prefs.setBool('isShowPopUpMessage', true);
+//   }
+
+//   Future<void> hideMenu() async {
+//     print("vao dÿy");
+//      SharedPreferences prefs = await SharedPreferences.getInstance();
+//    prefs.setBool('isShowPopUpMessage', false);
+//   }
+
+//   void toggleMenu() {
+//   }
+// }

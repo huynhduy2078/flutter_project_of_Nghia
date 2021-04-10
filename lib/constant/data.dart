@@ -137,48 +137,61 @@ List userMessages = [
 // list of messages
 List messages = [
   {
+     "idMessage": "user1_user2_1",
     "isMe": true,
     "messageType": 1,
     "message": "Ubuntu jng hery",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+          "icon": false,
   },
   {
+    "idMessage": "user1_user2_2",
     "isMe": true,
     "messageType": 2,
     "message": "Need to use code to command",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+          "icon": false,
   },
   {
+    "idMessage": "user1_user2_3",
     "isMe": true,
     "messageType": 3,
     "message": "Tov work tor hery",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+          "icon": false,
   },
   {
+    "idMessage": "user1_user2_4",
     "isMe": false,
     "messageType": 1,
     "message": "me hate you",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+          "icon": false,
   },
   {
+    "idMessage": "user1_user2_5",
     "isMe": false,
     "messageType": 2,
     "message": "bah",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+          "icon": false,
   },
   {
+    "idMessage": "user1_user2_6",
     "isMe": false,
     "messageType": 3,
     "message": "-_-",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+          "icon": false,
   },
   {
+    "idMessage": "user1_user2_7",
     "isMe": true,
     "messageType": 1,
     "message": "Som muk",
@@ -187,13 +200,16 @@ List messages = [
     "icon": true,
   },
   {
+    "idMessage": "user1_user2_8",
     "isMe": true,
     "messageType": 3,
     "message": "Ory Reang",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+        "icon": false,
   },
   {
+    "idMessage": "user1_user2_9",
     "isMe": false,
     "messageType": 1,
     "message": "Eng use ah laptop nus ubuntu",
@@ -202,6 +218,7 @@ List messages = [
     "icon": true,
   },
   {
+    "idMessage": "user1_user2_10",
     "isMe": false,
     "messageType": 2,
     "message": "code teat ban jenh",
@@ -209,6 +226,7 @@ List messages = [
         "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
   },
   {
+    "idMessage": "user1_user2_11",
     "isMe": false,
     "messageType": 3,
     "message": "use laptop neng lerk na kor code",
@@ -217,13 +235,16 @@ List messages = [
     "icon": true,
   },
   {
+    "idMessage": "user1_user2_12",
     "isMe": true,
     "messageType": 4,
     "message": "Oh hahahah good",
     "profileImg":
-        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80"
+        "https://images.unsplash.com/photo-1517070208541-6ddc4d3efbcb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3319&q=80",
+          "icon": false,
   },
   {
+    "idMessage": "user1_user2_13",
     "isMe": false,
     "messageType": 4,
     "message":
