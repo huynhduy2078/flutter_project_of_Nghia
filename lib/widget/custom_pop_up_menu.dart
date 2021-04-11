@@ -1,5 +1,9 @@
 import 'dart:math' as math;
 
+import 'package:chat_messanger_ui/constant/data.dart';
+import 'package:chat_messanger_ui/constant/evenSelectMessage.dart';
+import 'package:chat_messanger_ui/theme/colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'platform/platform.dart';
 
@@ -22,25 +26,26 @@ class CustomPopupMenuController extends ChangeNotifier {
   }
 
   void toggleMenu() {
-    menuIsShowing = menuIsShowing;
+    menuIsShowing = !menuIsShowing;
     notifyListeners();
   }
 }
 
 class CustomPopupMenu extends StatefulWidget {
   CustomPopupMenu({
-    this.child,
-    this.pressType,
-    this.listEventIcon,
-    this.onChangeIcon,
-    this.controller,
+    required this.child,
+    required this.pressType,
+    required this.onChangeIcon,
     this.arrowColor = const Color(0xFF4C4C4C),
     this.showArrow = true,
     this.barrierColor = Colors.black12,
     this.arrowSize = 10.0,
     this.horizontalMargin = 10.0,
     this.verticalMargin = 10.0,
-    this.onShowIcon,
+    this.controller,
+    required this.onShowIcon,
+    required this.onChangeAction,
+    required this.listEventIcon,
   });
 
   final Widget child;
@@ -52,18 +57,19 @@ class CustomPopupMenu extends StatefulWidget {
   final double verticalMargin;
   final double arrowSize;
   final List listEventIcon;
-  final CustomPopupMenuController controller;
   final ValueChanged<int> onChangeIcon;
+  final ValueChanged<int> onChangeAction;
   final ValueChanged<bool> onShowIcon;
+  final CustomPopupMenuController? controller;
   @override
   _CustomPopupMenuState createState() => _CustomPopupMenuState();
 }
 
 class _CustomPopupMenuState extends State<CustomPopupMenu> {
-  RenderBox _childBox;
-  RenderBox _parentBox;
-  OverlayEntry _overlayEntry;
-  CustomPopupMenuController _controller;
+  RenderBox? _childBox;
+  RenderBox? _parentBox;
+  OverlayEntry? _overlayEntry;
+  CustomPopupMenuController? _controller;
 
   _showMenu() {
     Widget arrow = ClipPath(
@@ -79,126 +85,233 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
       builder: (context) {
         return Stack(
           children: <Widget>[
-            GestureDetector(
-              onTap: () => _hideMenu(),
-              child: Container(
-                color: widget.barrierColor,
-              ),
-            ),
-            Center(
-              child: Container(
-                constraints: BoxConstraints(
-                  maxWidth: _parentBox.size.width - 2 * widget.horizontalMargin,
-                  minWidth: 0,
-                ),
-                child: CustomMultiChildLayout(
-                  delegate: _MenuLayoutDelegate(
-                    anchorSize: _childBox.size,
-                    anchorOffset: _childBox.localToGlobal(
-                      Offset(-widget.horizontalMargin, 0),
+            Column(
+              children: [
+                Container(
+                  height: (MediaQuery.of(context).size.height - 80),
+                  child: GestureDetector(
+                    onTap: () => _hideMenu(),
+                    child: Container(
+                      color: widget.barrierColor,
                     ),
-                    verticalMargin: widget.verticalMargin,
                   ),
-                  children: <Widget>[
-                    if (widget.showArrow)
-                      LayoutId(
-                        id: _MenuLayoutId.arrow,
-                        child: arrow,
-                      ),
-                    if (widget.showArrow)
-                      LayoutId(
-                        id: _MenuLayoutId.downArrow,
-                        child: Transform.rotate(
-                          angle: math.pi,
-                          child: arrow,
-                        ),
-                      ),
-                    LayoutId(
-                      id: _MenuLayoutId.content,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Material(
-                            child: ClipRRect(
-                              child: Container(
-                                width: 300,
-                                //color: const Color(0xFF4C4C4C),
-                                color: Colors.transparent,
-
-                                child: Column(
-                                  children: [
-                                    GestureDetector(
-                                      child: Container(
-                                        height: 50,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(25)),
-                                          border: Border.all(
-                                            color: Colors.green,
-                                            width: 0.5,
-                                          ),
-                                        ),
-                                        child: GridView.count(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 5, vertical: 5),
-                                          crossAxisCount: 6,
-                                          crossAxisSpacing: 0,
-                                          mainAxisSpacing: 0,
-                                          shrinkWrap: true,
-                                          physics:
-                                              NeverScrollableScrollPhysics(),
-                                          children: widget.listEventIcon
-                                              .map((item) => Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      GestureDetector(
-                                                        behavior:
-                                                            HitTestBehavior
-                                                                .translucent,
-                                                        onTap: () => {
-                                                          widget.onChangeIcon(
-                                                              item["id"]),
-                                                          _hideMenu(),
-                                                        },
-                                                        child: Image.asset(
-                                                          item["iconGif"],
-                                                          width: 40.0,
-                                                          height: 40.0,
-                                                          fit: BoxFit.contain,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ))
-                                              .toList(),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                ),
+                Container(
+                  height: 80,
+                  color: CommonColors.white,
+                  child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: listEventAction.length < 3
+                          ? listEventAction
+                              .map(
+                                (item) => FlatButton(
+                                  onPressed: () {
+                                    _hideMenu();
+                                    widget.onChangeAction(item['id']);
+                                  },
+                                  child: Text(
+                                    item['title'],
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        color: CommonColors.black,
+                                        fontSize: 15),
+                                  ),
+                                ),
+                              )
+                              .toList()
+                          : [
+                              FlatButton(
+                                onPressed: () {
+                                  _hideMenu();
+                                  widget
+                                      .onChangeAction(listEventAction[0]['id']);
+                                },
+                                child: Text(
+                                  listEventAction[0]['title'],
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                      color: CommonColors.black, fontSize: 15),
                                 ),
                               ),
-                            ),
-                            color: Colors.transparent,
-                          ),
-                        ],
+                              FlatButton(
+                                onPressed: () {
+                                  _hideMenu();
+                                  widget
+                                      .onChangeAction(listEventAction[1]['id']);
+                                },
+                                child: Text(
+                                  listEventAction[1]['title'],
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                      color: CommonColors.black, fontSize: 15),
+                                ),
+                              ),
+                              FlatButton(
+                                onPressed: () {
+                                  _hideMenu();
+                                  showCupertinoModalPopup(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        CupertinoActionSheet(
+                                      actions: listEventAction
+                                          .map((item) =>
+                                              CupertinoActionSheetAction(
+                                                child: Text(
+                                                  item['title'],
+                                                  textAlign: TextAlign.justify,
+                                                  style: TextStyle(
+                                                      color: CommonColors.black,
+                                                      fontSize: 15),
+                                                ),
+                                                onPressed: () {
+                                                  widget.onChangeAction(
+                                                      item['id']);
+                                                  Navigator.pop(context);
+                                                },
+                                              ))
+                                          .skip(2)
+                                          .toList(),
+                                      cancelButton: CupertinoActionSheetAction(
+                                        child: Text(
+                                          "Hủy",
+                                          textAlign: TextAlign.justify,
+                                          style: TextStyle(
+                                              color: CommonColors.black,
+                                              fontSize: 15),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Text(
+                                  "Khác...",
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(
+                                      color: CommonColors.black, fontSize: 15),
+                                ),
+                              ),
+                            ]),
+                )
+              ],
+            ),
+            Container(
+              constraints: BoxConstraints(
+                maxWidth: _parentBox!.size.width - 2 * widget.horizontalMargin,
+                minWidth: 0,
+              ),
+              child: CustomMultiChildLayout(
+                delegate: _MenuLayoutDelegate(
+                  anchorSize: _childBox!.size,
+                  anchorOffset: _childBox!.localToGlobal(
+                    Offset(-widget.horizontalMargin, 0),
+                  ),
+                  verticalMargin: widget.verticalMargin,
+                ),
+                children: <Widget>[
+                  if (widget.showArrow)
+                    LayoutId(
+                      id: _MenuLayoutId.arrow,
+                      child: arrow,
+                    ),
+                  if (widget.showArrow)
+                    LayoutId(
+                      id: _MenuLayoutId.downArrow,
+                      child: Transform.rotate(
+                        angle: math.pi,
+                        child: arrow,
                       ),
                     ),
-                  ],
-                ),
+                  LayoutId(
+                    id: _MenuLayoutId.content,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Material(
+                          child: ClipRRect(
+                            child: Container(
+                              width: 300,
+                              //color: const Color(0xFF4C4C4C),
+                              color: Colors.transparent,
+
+                              child: Column(
+                                children: [
+                                  GestureDetector(
+                                    child: Container(
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(25)),
+                                        border: Border.all(
+                                          color: Colors.green,
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      child: GridView.count(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 5, vertical: 5),
+                                        crossAxisCount: 6,
+                                        crossAxisSpacing: 0,
+                                        mainAxisSpacing: 0,
+                                        shrinkWrap: true,
+                                        physics: NeverScrollableScrollPhysics(),
+                                        children: widget.listEventIcon
+                                            .map((item) => Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.min,
+                                                  children: <Widget>[
+                                                    GestureDetector(
+                                                      behavior: HitTestBehavior
+                                                          .translucent,
+                                                      onTap: () => {
+                                                        widget.onChangeIcon(
+                                                            item["id"]),
+                                                        _hideMenu(),
+                                                      },
+                                                      child: Image.asset(
+                                                        item["iconGif"],
+                                                        width: 40.0,
+                                                        height: 40.0,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ))
+                                            .toList(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          color: Colors.transparent,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         );
       },
     );
-    if (_overlayEntry = null) {
-      Overlay.of(context).insert(_overlayEntry);
+    if (_overlayEntry != null) {
+      print("_overlayEntry_show");
+      print(_overlayEntry);
+      Overlay.of(context)!.insert(_overlayEntry!);
     }
   }
 
   _hideMenu() {
-    if (_overlayEntry = null) {
+    print("vao hide>>>>>>>");
+    print(_overlayEntry);
+    if (_overlayEntry != null) {
       widget.onShowIcon(false);
       _overlayEntry?.remove();
       _overlayEntry = null;
@@ -209,6 +322,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
     if (_controller?.menuIsShowing ?? false) {
       _showMenu();
     } else {
+      print("vaodayyyyyyy");
       _hideMenu();
     }
   }
@@ -220,8 +334,9 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
     if (_controller == null) _controller = CustomPopupMenuController();
     _controller?.addListener(_updateView);
     WidgetsBinding.instance?.addPostFrameCallback((call) {
-      _childBox = context.findRenderObject() as RenderBox;
-      _parentBox = Overlay.of(context).context.findRenderObject() as RenderBox;
+      _childBox = context.findRenderObject() as RenderBox?;
+      _parentBox =
+          Overlay.of(context)!.context.findRenderObject() as RenderBox?;
     });
   }
 
@@ -254,6 +369,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
       ),
       color: Colors.transparent,
     );
+
     if (Platform.isIOS) {
       return child;
     } else {
@@ -285,9 +401,9 @@ enum _MenuPosition {
 
 class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
   _MenuLayoutDelegate({
-    this.anchorSize,
-    this.anchorOffset,
-    this.verticalMargin,
+    required this.anchorSize,
+    required this.anchorOffset,
+    required this.verticalMargin,
   });
 
   final Size anchorSize;
@@ -415,7 +531,7 @@ class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
     if (hasChild(_MenuLayoutId.downArrow)) {
       positionChild(
         _MenuLayoutId.downArrow,
-        isBottom
+        !isBottom
             ? Offset(arrowOffset.dx, arrowOffset.dy - 0.1)
             : Offset(-100, 0),
       );

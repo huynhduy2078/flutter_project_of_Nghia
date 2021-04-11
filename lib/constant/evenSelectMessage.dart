@@ -37,3 +37,35 @@ List listEventIcon = [
     "name": "angry",
   },
 ];
+
+List listEventAction = [ {
+    "id": 0,
+    "name": "delete",
+    "title": "Xóa"
+  },
+  {
+    "id": 1,
+    "name": "copy",
+    "title": "Sao Chép"
+  },
+  {
+    "id": 2,
+    "name": "Tính Năng 1",
+    "title": "Action3"
+  },
+  {
+    "id": 3,
+    "name": "Tính Năng 2",
+    "title": "Action4"
+  },
+];
+
+
+getIcon(int id) {
+  for (var i = 0; i < listEventIcon.length; i++) {
+    if (listEventIcon[i]['id'] == id) {
+      return listEventIcon[i];
+    }
+  }
+  return null;
+}
