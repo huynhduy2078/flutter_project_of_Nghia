@@ -3,9 +3,11 @@ import 'dart:math';
 import 'package:chat_messanger_ui/constant/evenSelectMessage.dart';
 import 'package:chat_messanger_ui/constant/eventMessage.dart';
 import 'package:chat_messanger_ui/constant/data.dart';
-import 'package:chat_messanger_ui/pages/chat-bubble.dart';
+import 'package:chat_messanger_ui/pages/chat-bubble_2.dart';
 import 'package:chat_messanger_ui/theme/colors.dart';
 import 'package:chat_messanger_ui/widget/custom_pop_up_menu.dart';
+import 'package:chat_messanger_ui/pages/chat-action.dart';
+import 'package:chat_messanger_ui/widget/message_item.dart';
 
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
@@ -99,95 +101,10 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
   }
 
   Widget getBottom() {
-    return Container(
-      height: 80,
-      width: double.infinity,
-      decoration: BoxDecoration(color: CommonColors.grey.withOpacity(0.2)),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20, bottom: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: (MediaQuery.of(context).size.width - 40) / 2,
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.add_circle,
-                    size: 35,
-                    color: CommonColors.primary,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Icon(
-                    Icons.camera_alt,
-                    size: 35,
-                    color: CommonColors.primary,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Icon(
-                    Icons.photo,
-                    size: 35,
-                    color: CommonColors.primary,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Icon(
-                    Icons.keyboard_voice,
-                    size: 35,
-                    color: CommonColors.primary,
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: (MediaQuery.of(context).size.width - 40) / 2,
-              child: Row(
-                children: <Widget>[
-                  Container(
-                    width: (MediaQuery.of(context).size.width - 140) / 2,
-                    height: 40,
-                    decoration: BoxDecoration(
-                        color: CommonColors.grey,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: TextField(
-                        cursorColor: CommonColors.black,
-                        controller: _sendMessageController,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "Aa",
-                            suffixIcon: Icon(
-                              Icons.face,
-                              color: CommonColors.primary,
-                              size: 35,
-                            )),
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Icon(
-                    Icons.thumb_up,
-                    size: 35,
-                    color: CommonColors.primary,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+    return FlatTextField();
   }
 
   Widget getBody() {
-    return ChatBubble();
+    return MessageItem();
   }
 }

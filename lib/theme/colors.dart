@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+
 import 'dart:ui' show Color;
 
 class CommonColors {
@@ -33,4 +35,6 @@ class CommonColors {
   static const Color bg_event_action = Color(0xFF25282E);
 
   static const Color bg_nav_bar = Color(0xFF8DBBD2);
+
+  static const Color altColor = Color(0xff17263c);
 }

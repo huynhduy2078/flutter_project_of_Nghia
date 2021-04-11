@@ -1,6 +1,4 @@
 import 'dart:math' as math;
-
-import 'package:chat_messanger_ui/constant/data.dart';
 import 'package:chat_messanger_ui/constant/evenSelectMessage.dart';
 import 'package:chat_messanger_ui/theme/colors.dart';
 import 'package:flutter/cupertino.dart';

@@ -9,32 +9,23 @@ import 'package:chat_messanger_ui/widget/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
 
-class ChatBubble extends StatefulWidget {
+class ChatBubble_2 extends StatefulWidget {
   @override
   _ChatBubbleState createState() => _ChatBubbleState();
 }
 
-class _ChatBubbleState extends State<ChatBubble> {
+class _ChatBubbleState extends State<ChatBubble_2> {
   TextEditingController _sendMessageController = new TextEditingController();
   CustomPopupMenuController _controller = CustomPopupMenuController();
   var isSelectPopUp = false;
   var messageIdSelect = '';
   var listMessage = messages;
 
-
-  //    print("onHideSelectonHideSelect");
-    // print(widget.onHideSelect);
-
-
   Widget build(BuildContext context) {
-    
-    // setState(() {
-    //   if ()
-    // });
-   
     return Container(
       color: CommonColors.bg_room,
       child: ListView(
+        reverse: true,
         padding: EdgeInsets.only(right: 20, left: 20, top: 20, bottom: 80),
         children: List.generate(listMessage.length, (index) {
           var id = listMessage[index]['idMessage'];
@@ -45,11 +36,11 @@ class _ChatBubbleState extends State<ChatBubble> {
           var profileImg = listMessage[index]['profileImg'];
           if (isMe) {
             return GestureDetector(
-              onTap: _controller.hideMenu,
               child: Container(
                 width: (MediaQuery.of(context).size.width - 40),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(1, 1, 1, (icon > 0 ? 10.0 : 1.0)),
+                  padding:
+                      EdgeInsets.fromLTRB(1, 1, 1, (icon > 0 ? 10.0 : 1.0)),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
@@ -81,7 +72,7 @@ class _ChatBubbleState extends State<ChatBubble> {
                                       }
                                     });
                                   },
-                                  onChangeAction: (int value) {  },
+                                  onChangeAction: (int value) {},
                                   child: Container(
                                     constraints: BoxConstraints(
                                         minWidth: 50,
