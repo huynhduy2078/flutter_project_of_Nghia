@@ -35,7 +35,7 @@ class TextFieldCommon extends StatelessWidget {
     this.isDark = false,
     this.isMoney = false,
     this.autofocus = false,
-    this.textColor = Colors.black,
+    this.textColor = blue_story,
     this.suffix,
     this.prefixWidget,
     this.prefixIcon,
@@ -76,13 +76,13 @@ class TextFieldCommon extends StatelessWidget {
                           ? TextInputType.numberWithOptions()
                           : TextInputType.text,
               style: TextStyle(
-                  fontWeight: FontWeight.w100,
+                  fontWeight: FontWeight.w300,
                   fontSize: 15,
-                  color: isDark ? Colors.white : textColor),
+                  color: isDark ? Colors.white : black),
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(horizontal: 30, vertical: 20),
-                fillColor: isDark ? black.withOpacity(0.5) : hover_ms,
+                fillColor: isDark ? black.withOpacity(0.5) : grey,
                 hintText: hintText,
                 prefixText: prefix,
                 prefix: prefixWidget,
@@ -97,7 +97,7 @@ class TextFieldCommon extends StatelessWidget {
                     fontSize: 15,
                     color: isDark
                         ? Colors.white.withOpacity(0.9)
-                        : textColor.withOpacity(0.4)),
+                        : textLigntColor),
                 filled: true,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),

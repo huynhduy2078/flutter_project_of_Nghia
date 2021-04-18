@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         title: 'NAME_PROJECT',
         debugShowCheckedModeBanner: false,
         theme: theme(),
-        home: ProfileScreen(),
+        home: Login(),
       ),
     );
   }

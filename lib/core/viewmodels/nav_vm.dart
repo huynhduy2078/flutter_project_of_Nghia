@@ -34,7 +34,7 @@ class NavItems extends ChangeNotifier {
     ),
     NavModel(
       id: 3,
-      icon: "assets/icons/user.svg",
+      icon: "assets/icons/User.svg",
       destination: ProfileScreen(),
     ),
   ];

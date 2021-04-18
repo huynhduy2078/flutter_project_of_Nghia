@@ -8,6 +8,10 @@ import 'package:intl/intl.dart';
 class ProductViewModel extends ChangeNotifier {
   var formKey = GlobalKey<FormState>();
   final apiHelper = ApiHelper();
+  var isMe = "Huynhduy281096@gmail.com";
+
+   String get getMe => isMe;
+
 
   List<Products> _products = [];
   List<Products> get products => _products;
@@ -18,6 +22,7 @@ class ProductViewModel extends ChangeNotifier {
 
   List<Products> _productsFind = [];
   List<Products> get productsFind => _productsFind;
+  
 
   set productsFind(List<Products> val) {
     _productsFind = val;
@@ -32,6 +37,14 @@ class ProductViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<String> _listFindPeople = [];
+  List<String> get listFindPeople => _listFindPeople;
+
+  set listFindPeople(List<String> val) {
+    _listFindPeople = val;
+    notifyListeners();
+  }
+
   bool _isFind = false;
   bool get isFind => _isFind;
 
@@ -41,6 +54,7 @@ class ProductViewModel extends ChangeNotifier {
   }
 
   final TextEditingController addNewProduct = new TextEditingController();
+  final TextEditingController textSearch = new TextEditingController();
 
   addProduct() async {
     try {
@@ -89,14 +103,14 @@ class ProductViewModel extends ChangeNotifier {
     return Color(0xFF61AEC2);
   }
 
-  findProduct(text) {
+  searchProduct() {
     List<Products> _productsFind = [];
     isLoading = true;
-    if (text.length != 0) {
+    if (textSearch.text.length != 0) {
       isFind = true;
       products.forEach((product) {
-        if (product.content.contains(text) ||
-            product.id.toString().contains(text)) {
+        if (product.content.contains(textSearch.text) ||
+            product.id.toString().contains(textSearch.text)) {
           _productsFind.add(product);
         }
       });
@@ -108,22 +122,67 @@ class ProductViewModel extends ChangeNotifier {
     isLoading = false;
   }
 
+  findProduct() {
+    List<Products> _productsFind = [];
+    isLoading = true;
+    if (listFindPeople.length > 0) {
+      listProduct.forEach((product) {
+        listFindPeople.forEach((people) {
+          if (product.userCreate == people) {
+            _productsFind.add(product);
+          }
+        });
+      });
+      productsFind = _productsFind;
+      isFind = true;
+    } else {
+      isFind = false;
+      productsFind = products;
+    }
+    isLoading = false;
+  }
+
+  getNumberPeopleCreate() {
+    List<String> listAllUser = getListUserCreate();
+    if (listFindPeople.length == listAllUser.length) {
+      return "Tất cả";
+    }
+    if (listFindPeople.length == 1) {
+      if (listFindPeople[0] == isMe) {
+        return "Chỉ mình bạn";
+      }
+      return listFindPeople[0];
+    }
+    if (listFindPeople.length > 0) {
+      if (listFindPeople.contains(isMe)) {
+        return "Bạn và ${listFindPeople.length - 1} user khác";
+      }
+      return "${listFindPeople.length} user khác";
+    }
+    return "Tất cả";
+  }
+
+  getListUserCreate() {
+    List<String> listAll = [];
+    for (int i = 0; i < listProduct.length; i++) {
+      Products product = listProduct[i];
+      if (product.userCreate != null) {
+        listAll.add(product.userCreate);
+      }
+    }
+    if (listAll.contains(isMe)) {
+      listAll.insert(0, isMe);
+    }
+    return [
+      ...{...listAll}
+    ];
+  }
+
   // Demo list
   List<Products> listProduct = [
     Products(
-      id: 1,
-      userCreate: "Huynhduy281096@gmail.com",
-      status: "NEW",
-      content:
-          'aaaaaaaaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
-      note: '',
-      dateCreate: DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.now()),
-      history: HistoryModel(),
-      buyer: BuyerModel(),
-    ),
-    Products(
       id: 2,
-      userCreate: "Huynhduy281096@gmail.com",
+      userCreate: "Huunghia8896@gmail.com",
       status: "EDIT",
       content: 'bbbbbbbbbbbb',
       note: '',
@@ -136,6 +195,27 @@ class ProductViewModel extends ChangeNotifier {
       userCreate: "Huynhduy281096@gmail.com",
       status: "DONE",
       content: 'ccccccccccccccc',
+      note: '',
+      dateCreate: DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.now()),
+      history: HistoryModel(),
+      buyer: BuyerModel(),
+    ),
+    Products(
+      id: 3,
+      userCreate: "ThanhNguyen@gmail.com",
+      status: "CONFIRMING",
+      content: 'hello',
+      note: '',
+      dateCreate: DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.now()),
+      history: HistoryModel(),
+      buyer: BuyerModel(),
+    ),
+    Products(
+      id: 1,
+      userCreate: "Huynhduy281096@gmail.com",
+      status: "NEW",
+      content:
+          'aaaaaaaaaaaaassssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss',
       note: '',
       dateCreate: DateFormat('dd-MM-yyyy – kk:mm').format(DateTime.now()),
       history: HistoryModel(),
