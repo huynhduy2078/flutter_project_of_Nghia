@@ -4,19 +4,25 @@ class ChatModel {
   String id;
   String username;
   String message;
+  bool isMe;
   DateTime timestamp;
+  int icon;
 
   ChatModel({
-    required this.id,
-    required this.username,
-    required this.message,
-    required this.timestamp,
+    this.id,
+    this.isMe,
+    this.username,
+    this.message,
+    this.icon,
+    this.timestamp,
   });
 
-  fromJson(Map<String, dynamic> json) {
+  ChatModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
+    isMe = json['isMe'];
     message = json['message'];
+    icon = json['icon'];
     if (json['timestamp'] != null) {
       timestamp = DateTime.fromMillisecondsSinceEpoch(json['timestamp']);
     } else {
@@ -29,6 +35,7 @@ class ChatModel {
     data['id'] = this.id;
     data['username'] = this.username;
     data['message'] = this.message;
+    data['icon'] = this.icon;
     data['timestamp'] = this.timestamp.millisecondsSinceEpoch;
     return data;
   }

@@ -6,7 +6,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.9.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -16,6 +16,10 @@ dependencies:
   flutter_hooks: ^0.16.0
   hooks_riverpod: ^0.14.0+1
   socket_io_client: ^0.9.12
+  provider: ^5.0.0
+  intl: ^0.17.0
+  flushbar: ^1.10.4
+  flutter_svg: ^0.21.0+1
   fluentui_system_icons: 1.1.54
   username_gen: 1.0.2
   google_fonts: 1.0.0
@@ -30,22 +34,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/like.gif
-    - images/love.gif
-    - images/haha.gif
-    - images/wow.gif
-    - images/sad.gif
-    - images/angry.gif
-    - images/angry2.png
-    - images/love2.png
-    - images/haha2.png
-    - images/wow2.png
-    - images/sad2.png
-    - images/ic_like.png
-    - images/ic_like_fill.png
-
-    - sounds/box_down.mp3
-    - sounds/box_up.mp3
-    - sounds/icon_choose.mp3
-    - sounds/icon_focus.mp3
-    - sounds/short_press_like.mp3
+    - assets/images/
+    - assets/icons/

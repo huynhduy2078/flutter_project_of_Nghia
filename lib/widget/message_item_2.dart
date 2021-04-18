@@ -1,5 +1,5 @@
 import 'package:chat_messanger_ui/core/models/chat_model.dart';
-import 'package:chat_messanger_ui/theme/colors.dart';
+import 'package:chat_messanger_ui/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:socket_chat/core/models/chat_model.dart';
@@ -10,9 +10,9 @@ class MessageItem_ extends StatelessWidget {
   final bool isMe;
   final ChatModel message;
   const MessageItem_({
-    Key? key,
+    Key key,
     this.isMe = false,
-    required this.message,
+    this.message,
   }) : super(key: key);
 
   @override
@@ -30,8 +30,7 @@ class MessageItem_ extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: (isMe ? CommonColors.bg_ms_me : CommonColors.white)
-                      .withOpacity(0.12),
+                  color: (isMe ? bg_ms_me : white).withOpacity(0.12),
                   borderRadius: BorderRadius.circular(15),
                 ),
                 padding: EdgeInsets.all(15), //getPadding
@@ -47,12 +46,6 @@ class MessageItem_ extends StatelessWidget {
               ),
             ],
           ),
-          // const YMargin(3),
-          // Text(
-          //   '${timeAgoSinceDate(message?.timestamp ?? DateTime.now())}',
-          //   style: GoogleFonts.manrope(
-          //       color: Colors.grey, fontSize: 10, fontWeight: FontWeight.w300),
-          // ),
         ],
       ),
     );

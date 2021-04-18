@@ -1,6 +1,6 @@
 import 'dart:math' as math;
 import 'package:chat_messanger_ui/constant/evenSelectMessage.dart';
-import 'package:chat_messanger_ui/theme/colors.dart';
+import 'package:chat_messanger_ui/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'platform/platform.dart';
@@ -31,9 +31,9 @@ class CustomPopupMenuController extends ChangeNotifier {
 
 class CustomPopupMenu extends StatefulWidget {
   CustomPopupMenu({
-    required this.child,
-    required this.pressType,
-    required this.onChangeIcon,
+    this.child,
+    this.pressType,
+    this.onChangeIcon,
     this.arrowColor = const Color(0xFF4C4C4C),
     this.showArrow = true,
     this.barrierColor = Colors.black12,
@@ -41,9 +41,9 @@ class CustomPopupMenu extends StatefulWidget {
     this.horizontalMargin = 10.0,
     this.verticalMargin = 10.0,
     this.controller,
-    required this.onShowIcon,
-    required this.onChangeAction,
-    required this.listEventIcon,
+    this.onShowIcon,
+    this.onChangeAction,
+    this.listEventIcon,
   });
 
   final Widget child;
@@ -58,16 +58,16 @@ class CustomPopupMenu extends StatefulWidget {
   final ValueChanged<int> onChangeIcon;
   final ValueChanged<int> onChangeAction;
   final ValueChanged<bool> onShowIcon;
-  final CustomPopupMenuController? controller;
+  final CustomPopupMenuController controller;
   @override
   _CustomPopupMenuState createState() => _CustomPopupMenuState();
 }
 
 class _CustomPopupMenuState extends State<CustomPopupMenu> {
-  RenderBox? _childBox;
-  RenderBox? _parentBox;
-  OverlayEntry? _overlayEntry;
-  CustomPopupMenuController? _controller;
+  RenderBox _childBox;
+  RenderBox _parentBox;
+  OverlayEntry _overlayEntry;
+  CustomPopupMenuController _controller;
 
   _showMenu() {
     Widget arrow = ClipPath(
@@ -96,7 +96,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
                 ),
                 Container(
                   height: 80,
-                  color: CommonColors.white,
+                  color: white,
                   child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -111,9 +111,8 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
                                   child: Text(
                                     item['title'],
                                     textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                        color: CommonColors.black,
-                                        fontSize: 15),
+                                    style:
+                                        TextStyle(color: black, fontSize: 15),
                                   ),
                                 ),
                               )
@@ -128,8 +127,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
                                 child: Text(
                                   listEventAction[0]['title'],
                                   textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      color: CommonColors.black, fontSize: 15),
+                                  style: TextStyle(color: black, fontSize: 15),
                                 ),
                               ),
                               FlatButton(
@@ -141,8 +139,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
                                 child: Text(
                                   listEventAction[1]['title'],
                                   textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      color: CommonColors.black, fontSize: 15),
+                                  style: TextStyle(color: black, fontSize: 15),
                                 ),
                               ),
                               FlatButton(
@@ -159,7 +156,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
                                                   item['title'],
                                                   textAlign: TextAlign.justify,
                                                   style: TextStyle(
-                                                      color: CommonColors.black,
+                                                      color: black,
                                                       fontSize: 15),
                                                 ),
                                                 onPressed: () {
@@ -175,8 +172,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
                                           "Hủy",
                                           textAlign: TextAlign.justify,
                                           style: TextStyle(
-                                              color: CommonColors.black,
-                                              fontSize: 15),
+                                              color: black, fontSize: 15),
                                         ),
                                         onPressed: () {
                                           Navigator.pop(context);
@@ -188,8 +184,7 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
                                 child: Text(
                                   "Khác...",
                                   textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                      color: CommonColors.black, fontSize: 15),
+                                  style: TextStyle(color: black, fontSize: 15),
                                 ),
                               ),
                             ]),
@@ -198,13 +193,13 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
             ),
             Container(
               constraints: BoxConstraints(
-                maxWidth: _parentBox!.size.width - 2 * widget.horizontalMargin,
+                maxWidth: _parentBox.size.width - 2 * widget.horizontalMargin,
                 minWidth: 0,
               ),
               child: CustomMultiChildLayout(
                 delegate: _MenuLayoutDelegate(
-                  anchorSize: _childBox!.size,
-                  anchorOffset: _childBox!.localToGlobal(
+                  anchorSize: _childBox.size,
+                  anchorOffset: _childBox.localToGlobal(
                     Offset(-widget.horizontalMargin, 0),
                   ),
                   verticalMargin: widget.verticalMargin,
@@ -300,14 +295,12 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
       },
     );
     if (_overlayEntry != null) {
-      print("_overlayEntry_show");
       print(_overlayEntry);
-      Overlay.of(context)!.insert(_overlayEntry!);
+      Overlay.of(context).insert(_overlayEntry);
     }
   }
 
   _hideMenu() {
-    print("vao hide>>>>>>>");
     print(_overlayEntry);
     if (_overlayEntry != null) {
       widget.onShowIcon(false);
@@ -320,7 +313,6 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
     if (_controller?.menuIsShowing ?? false) {
       _showMenu();
     } else {
-      print("vaodayyyyyyy");
       _hideMenu();
     }
   }
@@ -332,9 +324,8 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
     if (_controller == null) _controller = CustomPopupMenuController();
     _controller?.addListener(_updateView);
     WidgetsBinding.instance?.addPostFrameCallback((call) {
-      _childBox = context.findRenderObject() as RenderBox?;
-      _parentBox =
-          Overlay.of(context)!.context.findRenderObject() as RenderBox?;
+      _childBox = context.findRenderObject() as RenderBox;
+      _parentBox = Overlay.of(context).context.findRenderObject() as RenderBox;
     });
   }
 
@@ -399,9 +390,9 @@ enum _MenuPosition {
 
 class _MenuLayoutDelegate extends MultiChildLayoutDelegate {
   _MenuLayoutDelegate({
-    required this.anchorSize,
-    required this.anchorOffset,
-    required this.verticalMargin,
+    this.anchorSize,
+    this.anchorOffset,
+    this.verticalMargin,
   });
 
   final Size anchorSize;

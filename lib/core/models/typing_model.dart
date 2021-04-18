@@ -3,9 +3,9 @@ class TypingModel {
   String username;
   bool typing;
 
-  TypingModel({required this.id, required this.username, required this.typing});
+  TypingModel({this.id, this.username, this.typing});
 
-  fromJson(Map<String, dynamic> json) {
+  TypingModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
     typing = json['typing'];
