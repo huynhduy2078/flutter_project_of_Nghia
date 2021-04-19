@@ -6,8 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:chat_messanger_ui/utils/navigator.dart';
 import 'package:chat_messanger_ui/core/viewmodels/product_vm.dart';
 import 'package:provider/provider.dart';
-
-import 'find_people_create.dart';
+import 'find_user_create.dart';
 
 class Categories extends StatefulWidget {
   @override
