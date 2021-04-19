@@ -27,14 +27,14 @@ class UserModel {
         email = map['email'],
         isAdmin = map['isAdmin'],
         blocked = map['blocked'] ?? List(),
-        isOnline = map['is_online'] ?? false,
+        isOnline = map['isOnline'] ?? false,
         profilePicUrl = map['profilePicUrl'];
 
   UserModel.fromJson(Map<String, dynamic> json)
       : userId = json['userId'],
         name = json['name'],
         phone = json['phone'],
-        isOnline = json['is_online'] ?? false,
+        isOnline = json['isOnline'] ?? false,
         isAdmin = json['isAdmin'],
         email = json['email'],
         profilePicUrl = json['profilePicUrl'];

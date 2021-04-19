@@ -20,10 +20,11 @@ class HomeHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SearchField(
+          SearchField( 
               hintText: "Serach product",
+              controller: context.read<ProductViewModel>().textSearch,
               onChanged: (e) => {
-                    context.read<ProductViewModel>().findProduct(e),
+                    context.read<ProductViewModel>().searchProduct(),
                   }),
           IconBtnWithCounter(
             svgSrc: "assets/icons/Settings.svg",
@@ -42,7 +43,6 @@ class HomeHeader extends StatelessWidget {
 }
 
 openAlertBox(context) {
-  var formKey = GlobalKey<FormState>();
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -60,9 +60,7 @@ openAlertBox(context) {
                   "Thêm sản phẩm:",
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
-                  height: 20.0,
-                ),
+                const YMargin(20),
                 Container(
                   width: double.infinity,
                   child: TextFormField(
@@ -88,9 +86,7 @@ openAlertBox(context) {
                   },
                   child: Column(
                     children: [
-                      SizedBox(
-                        height: 10.0,
-                      ),
+                      const YMargin(10),
                       context.read<ProductViewModel>().isLoading
                           ? Loader()
                           : Container(

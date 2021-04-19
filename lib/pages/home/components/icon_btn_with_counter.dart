@@ -1,4 +1,5 @@
 import 'package:chat_messanger_ui/utils/colors.dart';
+import 'package:chat_messanger_ui/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -16,6 +17,7 @@ class IconBtnWithCounter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double defaultSize = SizeConfig.defaultSize;
     return InkWell(
       borderRadius: BorderRadius.circular(100),
       onTap: press,
@@ -24,8 +26,8 @@ class IconBtnWithCounter extends StatelessWidget {
         children: [
           Container(
             padding: EdgeInsets.all(12),
-            height: 46,
-            width: 46,
+            height: defaultSize * 4.6,
+            width: defaultSize * 4.6,
             decoration: BoxDecoration(
               color: secondary.withOpacity(0.4),
               shape: BoxShape.circle,
@@ -37,8 +39,8 @@ class IconBtnWithCounter extends StatelessWidget {
               top: -3,
               right: 0,
               child: Container(
-                height: 16,
-                width: 16,
+                height: defaultSize * 1.6,
+                width: defaultSize * 1.6,
                 decoration: BoxDecoration(
                   color: Color(0xFFFF4848),
                   shape: BoxShape.circle,
@@ -48,8 +50,8 @@ class IconBtnWithCounter extends StatelessWidget {
                   child: Text(
                     "$numOfitem",
                     style: TextStyle(
-                      fontSize: 10,
-                      height: 1,
+                      fontSize: defaultSize * 1.0,
+                      height: defaultSize * 0.1,
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
                     ),

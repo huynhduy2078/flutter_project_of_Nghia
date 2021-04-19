@@ -5,10 +5,7 @@ import 'package:chat_messanger_ui/utils/margin.dart';
 import 'package:chat_messanger_ui/utils/size_config.dart';
 import 'package:chat_messanger_ui/widget/loader.dart';
 import 'package:chat_messanger_ui/widget/my_bottom_nav_bar.dart';
-import 'package:chat_messanger_ui/widget/search_field.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-
 import 'components/categories.dart';
 import 'components/home_header.dart';
 import 'package:provider/provider.dart';

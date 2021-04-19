@@ -2,7 +2,6 @@ import 'package:chat_messanger_ui/core/models/product_model.dart';
 import 'package:chat_messanger_ui/core/viewmodels/product_vm.dart';
 import 'package:chat_messanger_ui/utils/size_config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class ProductCard extends StatelessWidget {
   final Products product;

@@ -28,12 +28,16 @@ class LoginViewModel extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       var user = await auth.signIn(emailTEC.text, passwordTEC.text);
-      UserModel userModel = await auth.getUserProfile(user.uid);
+      print("user");
+      print(user);
+      // UserModel userModel = await auth.getUserProfile(user.uid);
 
       notifyListeners();
       print('Logged in As - ${user.name}');
 
       if (user != null) {
+        emailTEC.text = "";
+        passwordTEC.text = "";
         context.navigateReplace(HomeScreen());
       }
       isLoading = false;
@@ -42,7 +46,6 @@ class LoginViewModel extends ChangeNotifier {
       isLoading = false;
       notifyListeners();
       print(e.toString());
-      var error = e.toString();
 
       if (e.toString().contains('ERROR_WRONG_PASSWORD')) {
         return showDialog(
