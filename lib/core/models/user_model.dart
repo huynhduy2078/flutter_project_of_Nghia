@@ -1,9 +1,9 @@
 class UserModel {
+  int userId;
   String name;
   String email;
   String phone;
   String profilePicUrl;
-  String userId;
   String deviceId;
   bool isOnline;
   List<dynamic> blocked;

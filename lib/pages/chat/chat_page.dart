@@ -59,7 +59,7 @@ class _ChatPageState extends State<ChatPage> {
             Icon(Icons.edit)
           ],
         ),
-        const YMargin(10),
+        YMargin(defaultSize * 1),
         Container(
           width: double.infinity,
           height: defaultSize * 4.0,
@@ -78,7 +78,7 @@ class _ChatPageState extends State<ChatPage> {
                 border: InputBorder.none),
           ),
         ),
-        const YMargin(30),
+        YMargin(defaultSize * 3),
         Column(
           children: List.generate(provider.userMessages.length, (index) {
             return InkWell(
@@ -126,7 +126,7 @@ class _ChatPageState extends State<ChatPage> {
                         ],
                       ),
                     ),
-                    const YMargin(20),
+                    YMargin(defaultSize * 2),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -136,7 +136,7 @@ class _ChatPageState extends State<ChatPage> {
                               fontSize: defaultSize * 1.7,
                               fontWeight: FontWeight.w500),
                         ),
-                        const YMargin(5),
+                        YMargin(defaultSize * 0.5),
                         LastMessage(
                             username: provider.userMessages[index].email),
                       ],

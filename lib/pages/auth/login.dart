@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const YMargin(50),
+                      YMargin(defaultSize * 5),
                       Padding(
                         padding: const EdgeInsets.only(left: 30),
                         child: Column(
@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
                                   color: blue,
                                   fontWeight: FontWeight.w900),
                             ),
-                            const YMargin(10),
+                            YMargin(defaultSize),
                             Text(
                               'Hello there!',
                               style: TextStyle(
@@ -67,7 +67,7 @@ class _LoginState extends State<Login> {
                           ],
                         ),
                       ),
-                      const YMargin(30),
+                      YMargin(defaultSize * 3),
                       Form(
                         key: formKey,
                         child: Container(
@@ -75,7 +75,7 @@ class _LoginState extends State<Login> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              const YMargin(40),
+                              YMargin(defaultSize * 4),
                               TextFieldCommon(
                                 validator: (value) {
                                   if (Validator.isEmail(value)) {
@@ -89,7 +89,7 @@ class _LoginState extends State<Login> {
                                 controller: provider?.emailTEC,
                                 hintText: 'Email',
                               ),
-                              const YMargin(20),
+                              YMargin(defaultSize * 2),
                               TextFieldCommon(
                                 validator: (value) {
                                   if (Validator.isPassword(value)) {
@@ -120,7 +120,7 @@ class _LoginState extends State<Login> {
                                         },
                                       ),
                                     ),
-                              const YMargin(30),
+                              YMargin(defaultSize * 3),
                               InkResponse(
                                 onTap: () => context.navigate(Signup()),
                                 child: Row(
@@ -141,7 +141,7 @@ class _LoginState extends State<Login> {
                                   ],
                                 ),
                               ),
-                              const YMargin(50),
+                              YMargin(defaultSize * 5),
                             ],
                           ),
                         ),

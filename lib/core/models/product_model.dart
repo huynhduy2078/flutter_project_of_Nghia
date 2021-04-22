@@ -1,22 +1,13 @@
-import 'package:flutter/material.dart';
-
-import 'buyer_model.dart';
-import 'history_model.dart';
-
-class Products {
+class Product {
   final int id;
-  final String userCreate, status, content, note, dateCreate;
-  final HistoryModel history;
-  final BuyerModel buyer;
+  final String name, profilePicUrl, note;
+  final double price;
 
-  Products({
+  Product({
     this.id,
-    this.userCreate,
-    this.status,
-    this.content,
+    this.name,
+    this.price,
+    this.profilePicUrl,
     this.note,
-    this.dateCreate,
-    this.history,
-    this.buyer,
   });
 }

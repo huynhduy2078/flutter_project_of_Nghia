@@ -1,6 +1,5 @@
 import 'package:chat_messanger_ui/core/models/user_model.dart';
 import 'package:chat_messanger_ui/core/viewmodels/chat_vm.dart';
-import 'package:chat_messanger_ui/core/viewmodels/user_vm.dart';
 import 'package:chat_messanger_ui/pages/chat/chat-action.dart';
 import 'package:chat_messanger_ui/utils/colors.dart';
 import 'package:chat_messanger_ui/utils/margin.dart';
@@ -52,7 +51,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       image: NetworkImage(widget.info.profilePicUrl),
                       fit: BoxFit.cover)),
             ),
-            const XMargin(15),
+            XMargin(defaultSize * 1.5),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -63,7 +62,7 @@ class _ChatDetailPageState extends State<ChatDetailPage> {
                       fontWeight: FontWeight.bold,
                       color: black),
                 ),
-                const YMargin(3),
+                YMargin(defaultSize * 0.3),
                 Text(
                   "Active now",
                   style: TextStyle(

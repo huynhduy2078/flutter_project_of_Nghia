@@ -51,6 +51,7 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class Body extends StatelessWidget {
+  double defaultSize = SizeConfig.defaultSize;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -61,7 +62,7 @@ class Body extends StatelessWidget {
             name: "Nguyễn Huỳnh Duy",
             email: "Huynhduy281096@gmail.com",
           ),
-          const YMargin(20),
+          YMargin(defaultSize * 2),
           ProfileMenuItem(
             iconSrc: "assets/icons/bookmark_fill.svg",
             title: "Chức năng 1",

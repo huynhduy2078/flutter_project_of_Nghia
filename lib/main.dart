@@ -2,9 +2,7 @@ import 'package:chat_messanger_ui/services/register_providers.dart';
 import 'package:chat_messanger_ui/utils/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'pages/auth/login.dart';
-import 'pages/profile/profile_screen.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,9 +1,13 @@
-import 'package:flutter/material.dart';
-
 class HistoryModel {
-  final int id;
-  final String title, content;
+  final int idOrder, idUserCreate;
+  final String content;
+  final bool isCreate;
   final DateTime dateUpdate;
 
-  HistoryModel({this.id, this.title, this.content, this.dateUpdate});
+  HistoryModel(
+      {this.idOrder,
+      this.idUserCreate,
+      this.content,
+      this.isCreate,
+      this.dateUpdate});
 }

@@ -1,4 +1,5 @@
 import 'package:chat_messanger_ui/utils/colors.dart';
+import 'package:chat_messanger_ui/utils/margin.dart';
 import 'package:chat_messanger_ui/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class Info extends StatelessWidget {
                     color: textColor,
                   ),
                 ),
-                SizedBox(height: defaultSize / 2),
+                YMargin(defaultSize / 2),
                 Text(
                   email,
                   style: TextStyle(

@@ -13,9 +13,14 @@ class UserViewModel extends ChangeNotifier {
     }
   }
 
+  UserModel getUserByUser(id) {
+    return userMessages.firstWhere((user) => (user.userId == id),
+        orElse: () => null);
+  }
+
   List<UserModel> userMessages = [
     UserModel(
-      userId: "1",
+      userId: 1,
       name: "Nguyễn Hữu Nghĩa",
       phone: "123123123",
       email: "huunghia8896@gmail.com",
@@ -24,7 +29,7 @@ class UserViewModel extends ChangeNotifier {
       isOnline: true,
     ),
     UserModel(
-      userId: "2",
+      userId: 2,
       name: "Nguyễn Nhật Thành",
       email: "nguyennhatthanh95@gmail.com",
       profilePicUrl:
@@ -32,7 +37,7 @@ class UserViewModel extends ChangeNotifier {
       isOnline: false,
     ),
     UserModel(
-      userId: "3",
+      userId: 3,
       name: "Võ Hữu Hải",
       email: "haivo@gmail.com",
       profilePicUrl:
@@ -40,12 +45,21 @@ class UserViewModel extends ChangeNotifier {
       isOnline: false,
     ),
     UserModel(
-      userId: "4",
+      userId: 4,
       name: "Phúc Nguyễn",
       email: "Phucconga@gmail.com",
       profilePicUrl:
           "https://scontent-hkt1-1.xx.fbcdn.net/v/t1.6435-9/145125374_2956790244551580_1196515674077778820_n.jpg?_nc_cat=107&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=WyssJPErMPUAX-botag&_nc_ht=scontent-hkt1-1.xx&oh=6a68c578413d31e6266a3d1fea2e03bb&oe=609E3741",
       isOnline: false,
+    ),
+    UserModel(
+      userId: 5,
+      name: "Nguyễn Huỳnh Duy",
+      phone: "213414141",
+      email: "huynhduy281096@gmail.com",
+      profilePicUrl:
+          "https://scontent.fdad3-3.fna.fbcdn.net/v/t1.6435-9/147667367_2221894577947263_4563611527763467797_n.jpg?_nc_cat=108&ccb=1-3&_nc_sid=09cbfe&_nc_ohc=-uYfuDE_6OAAX_CaCgi&_nc_ht=scontent.fdad3-3.fna&oh=1d6277049e6c24310bcd32aef84d9ad8&oe=60A72E81",
+      isOnline: true,
     ),
   ];
 }

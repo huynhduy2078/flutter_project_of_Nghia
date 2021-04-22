@@ -1,4 +1,4 @@
-import 'package:chat_messanger_ui/core/viewmodels/product_vm.dart';
+import 'package:chat_messanger_ui/core/viewmodels/order_vm.dart';
 import 'package:chat_messanger_ui/utils/colors.dart';
 import 'package:chat_messanger_ui/utils/margin.dart';
 import 'package:chat_messanger_ui/utils/size_config.dart';
@@ -15,34 +15,39 @@ class HomeHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SearchField( 
-              hintText: "Serach product",
-              controller: context.read<ProductViewModel>().textSearch,
-              onChanged: (e) => {
-                    context.read<ProductViewModel>().searchProduct(),
-                  }),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/Settings.svg",
-            press: () => {},
-          ),
-          IconBtnWithCounter(
-            svgSrc: "assets/icons/Plus Icon.svg",
-            press: () {
-              openAlertBox(context);
-            },
-          ),
-        ],
+    OrderViewModel provider = context.watch<OrderViewModel>();
+    return Container(
+      color: primary,
+      child: Padding(
+        padding: EdgeInsets.all(10),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SearchField(
+                hintText: "Serach Order",
+                controller: provider.textSearch,
+                onChanged: (e) => {
+                      provider.findOrder(),
+                    }),
+            IconBtnWithCounter(
+              svgSrc: "assets/icons/Settings.svg",
+              press: () => {provider.showFind = !provider.showFind},
+            ),
+            IconBtnWithCounter(
+              svgSrc: "assets/icons/Plus Icon.svg",
+              press: () {
+                openAlertBox(context);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
 openAlertBox(context) {
+  double defaultSize = SizeConfig.defaultSize;
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -60,7 +65,7 @@ openAlertBox(context) {
                   "Thêm sản phẩm:",
                   style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                 ),
-                const YMargin(20),
+                YMargin(defaultSize * 2),
                 Container(
                   width: double.infinity,
                   child: TextFormField(
@@ -71,7 +76,7 @@ openAlertBox(context) {
                       }
                       return null;
                     },
-                    controller: context.read<ProductViewModel>().addNewProduct,
+                    controller: context.read<OrderViewModel>().addNewOrder,
                     decoration: InputDecoration(
                       hintText: "Thêm nội dung",
                       border: InputBorder.none,
@@ -81,13 +86,13 @@ openAlertBox(context) {
                 ),
                 InkWell(
                   onTap: () {
-                    context.read<ProductViewModel>().addProduct();
+                    context.read<OrderViewModel>().addOrder();
                     Navigator.of(context).pop();
                   },
                   child: Column(
                     children: [
-                      const YMargin(10),
-                      context.read<ProductViewModel>().isLoading
+                      YMargin(defaultSize),
+                      context.read<OrderViewModel>().isLoading
                           ? Loader()
                           : Container(
                               width: double.infinity,

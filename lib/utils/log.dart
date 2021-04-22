@@ -3,13 +3,13 @@ import 'package:meta/meta.dart';
 class Log {
   factory Log() => _instance;
 
-  Log._(this.production);
+  Log._(this.Orderion);
 
-  static void init([bool production = false]) => _instance = Log._(production);
+  static void init([bool Orderion = false]) => _instance = Log._(Orderion);
 
   static Log _instance;
 
-  final bool production;
+  final bool Orderion;
 
   String debug(String tag, [dynamic payload]) {
     final output = generator('=', tag, payload);
@@ -26,7 +26,7 @@ class Log {
   @visibleForTesting
   String generator(String delim, String tag, [dynamic payload]) {
     var _ = '';
-    if (!production) {
+    if (!Orderion) {
       final _d = delim.padRight(20, delim);
       _ += '\n$delim $tag $_d\n';
       if (payload != null) {

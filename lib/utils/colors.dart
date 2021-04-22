@@ -5,9 +5,13 @@ import 'dart:ui' show Color;
 
 const Color transparent = Colors.transparent;
 
-const Color primary = Color(0xFF2197F0);
+const Color primary = Color(0xFF1DA8FF);
+
+const Color primaryLignt = Color(0xFF60C1FF);
 
 const Color grey = Color(0xFFe9eaec);
+
+const Color bg = Color(0xFFD4D4D5);
 
 const Color white = Color(0xFFFFFFFF);
 
@@ -45,6 +49,6 @@ const Color textColor = Color(0xFF202E2E);
 
 const Color blue = Color(0xFF2197F0);
 
-const Color textLigntColor = Color(0xFF7286A5);
+const Color textLigntColor = Color(0xFF5A5D85);
 
 const Color icon = Color(0xFF7286A5);

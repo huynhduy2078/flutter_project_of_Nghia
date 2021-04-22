@@ -1,4 +1,5 @@
 import 'package:chat_messanger_ui/utils/colors.dart';
+import 'package:chat_messanger_ui/utils/margin.dart';
 import 'package:chat_messanger_ui/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -26,7 +27,7 @@ class ProfileMenuItem extends StatelessWidget {
             children: <Widget>[
               SvgPicture.asset(iconSrc,
                   height: defaultSize * 1.6, width: defaultSize * 1.8),
-              SizedBox(width: defaultSize * 2),
+              XMargin(defaultSize / 2),
               Text(
                 title,
                 style: TextStyle(

@@ -31,7 +31,7 @@ class _SignupState extends State<Signup> {
           color: Colors.white,
           child: ListView(
             children: <Widget>[
-              const YMargin(20),
+              YMargin(defaultSize * 2),
               Padding(
                 padding: const EdgeInsets.only(left: 30),
                 child: Column(
@@ -44,7 +44,7 @@ class _SignupState extends State<Signup> {
                           color: blue,
                           fontWeight: FontWeight.w900),
                     ),
-                    const YMargin(10),
+                    YMargin(defaultSize),
                     Text(
                       'Hello there!',
                       style:
@@ -58,7 +58,7 @@ class _SignupState extends State<Signup> {
                   ],
                 ),
               ),
-              const YMargin(30),
+              YMargin(defaultSize * 3),
               TextFieldCommon(
                 validator: (value) {
                   if (value.isNotEmpty) {
@@ -72,7 +72,7 @@ class _SignupState extends State<Signup> {
                 controller: provider?.nameTEC,
                 hintText: 'Full Name',
               ),
-              const YMargin(20),
+              YMargin(defaultSize * 2),
               TextFieldCommon(
                 validator: (value) {
                   if (Validator.isEmail(value)) {
@@ -86,7 +86,7 @@ class _SignupState extends State<Signup> {
                 controller: provider?.emailTEC,
                 hintText: 'Email',
               ),
-              const YMargin(20),
+              YMargin(defaultSize * 2),
               TextFieldCommon(
                 validator: (value) {
                   if (value.length >= 10) {
@@ -117,7 +117,7 @@ class _SignupState extends State<Signup> {
                         },
                       ),
                     ),
-              const YMargin(30),
+              YMargin(defaultSize * 3),
               InkWell(
                 onTap: () {
                   Navigator.of(context).pop();
@@ -139,7 +139,7 @@ class _SignupState extends State<Signup> {
                   ],
                 ),
               ),
-              const YMargin(90),
+              YMargin(defaultSize * 9),
             ],
           ),
         ),
