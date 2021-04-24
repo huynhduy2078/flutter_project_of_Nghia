@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 class ProductViewModel extends ChangeNotifier {
   Product getProductById(int id) {
-    print(id);
     var product;
     listProduct.forEach((pd) {
       if (pd.id == id) {

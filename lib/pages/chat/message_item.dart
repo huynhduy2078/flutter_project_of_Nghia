@@ -29,7 +29,6 @@ class _ChatBubbleState extends State<MessageItem> {
   var providerChat = ChatViewModel();
 
   Widget build(BuildContext context) {
-    print(widget.message);
     var isMe = widget.message.isMe;
     var icon = widget.message.icon;
 

@@ -17,7 +17,7 @@ class ProductItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: getheightProduct(order.product.length),
+        height: getheightProduct(order.product),
         width: SizeConfig.screenWidth,
         color: white,
         child: Container(
@@ -33,7 +33,7 @@ class ProductItem extends StatelessWidget {
                       color: black, fontSize: 14, fontWeight: FontWeight.w600),
                 ),
                 YMargin(defaultSize),
-                order.product.length > 0
+                order.product != null && order.product.length > 0
                     ? Expanded(
                         child: SizedBox(
                             child: new ListView.builder(
@@ -115,12 +115,14 @@ class ProductItem extends StatelessWidget {
     );
   }
 
-  getheightProduct(length) {
-    if (length >= 3) {
-      return defaultSize * 30;
-    }
-    if (length < 3 && length > 0) {
-      return defaultSize * 10 * length;
+  getheightProduct(product) {
+    if (product != null) {
+      if (product.length >= 3) {
+        return defaultSize * 30;
+      }
+      if (product.length < 3 && product.length > 0) {
+        return defaultSize * 10 * product.length;
+      }
     }
     return defaultSize * 8;
   }

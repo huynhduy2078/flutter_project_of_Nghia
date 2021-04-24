@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 class BuyerOrder extends StatelessWidget {
   final Order order;
   BuyerOrder({Key key, this.order}) : super(key: key);
+
   double defaultSize = SizeConfig.defaultSize;
   final valueNullReplace = "đang cập nhật...";
 
@@ -29,13 +30,13 @@ class BuyerOrder extends StatelessWidget {
                 ),
                 YMargin(defaultSize * 0.5),
                 Text(
-                  "Tên khách hàng: ${order.buyer.name != null ? order.buyer.name : valueNullReplace}",
+                  "Tên khách hàng: ${order.buyer != null && order.buyer.name != null ? order.buyer.name : valueNullReplace}",
                   style: TextStyle(
                       color: black, fontSize: 13, fontWeight: FontWeight.w600),
                 ),
                 YMargin(defaultSize * 0.5),
                 Text(
-                  "Số điện thoại: ${order.buyer.numberPhone != null ? order.buyer.numberPhone : valueNullReplace}",
+                  "Số điện thoại: ${order.buyer != null && order.buyer.numberPhone != null ? order.buyer.numberPhone : valueNullReplace}",
                   style: TextStyle(
                     color: textColor,
                     fontSize: 12.5,
@@ -43,7 +44,7 @@ class BuyerOrder extends StatelessWidget {
                 ),
                 YMargin(defaultSize * 0.5),
                 Text(
-                  "Địa chỉ: ${order.buyer.address != null ? order.buyer.address : valueNullReplace}",
+                  "Địa chỉ: ${order.buyer != null && order.buyer.address != null ? order.buyer.address : valueNullReplace}",
                   style: TextStyle(
                     color: textColor,
                     fontSize: 12.5,

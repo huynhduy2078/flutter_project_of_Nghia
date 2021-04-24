@@ -295,13 +295,11 @@ class _CustomPopupMenuState extends State<CustomPopupMenu> {
       },
     );
     if (_overlayEntry != null) {
-      print(_overlayEntry);
       Overlay.of(context).insert(_overlayEntry);
     }
   }
 
   _hideMenu() {
-    print(_overlayEntry);
     if (_overlayEntry != null) {
       widget.onShowIcon(false);
       _overlayEntry?.remove();

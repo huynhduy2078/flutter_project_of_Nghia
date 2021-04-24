@@ -28,8 +28,6 @@ class LoginViewModel extends ChangeNotifier {
       _isLoading = true;
       notifyListeners();
       var user = await auth.signIn(emailTEC.text, passwordTEC.text);
-      print("user");
-      print(user);
       // UserModel userModel = await auth.getUserProfile(user.uid);
 
       notifyListeners();

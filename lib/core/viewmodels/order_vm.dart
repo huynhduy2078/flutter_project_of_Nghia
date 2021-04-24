@@ -2,6 +2,7 @@ import 'dart:js';
 import 'dart:math';
 
 import 'package:chat_messanger_ui/core/models/buyer_model.dart';
+import 'package:chat_messanger_ui/core/models/history_model.dart';
 import 'package:chat_messanger_ui/core/models/order_model.dart';
 import 'package:chat_messanger_ui/core/models/product_model.dart';
 import 'package:chat_messanger_ui/core/models/status_model.dart';
@@ -12,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import 'history_vm.dart';
 import 'product_vm.dart';
+import 'user_vm.dart';
 
 class OrderViewModel extends ChangeNotifier {
   var formKey = GlobalKey<FormState>();
@@ -111,10 +113,6 @@ class OrderViewModel extends ChangeNotifier {
             dateCreate: DateTime.now(),
           ),
         );
-
-        var viewmodels = HistoryViewModel();
-
-        viewmodels.addHistorynewOrder(id, userCreate, addNewOrder.text);
       }
       addNewOrder.text = '';
       isLoading = false;
@@ -126,6 +124,29 @@ class OrderViewModel extends ChangeNotifier {
 
   showAllOrder() {
     order = listOrder;
+  }
+
+  getContentHistory(idOrder) {
+    var item = {};
+    HistoryModel historyLassUpdate =
+        HistoryViewModel().getHistoryLassUpdate(idOrder);
+    if (historyLassUpdate != null) {
+      item['content'] = historyLassUpdate.content;
+      item['idUser'] = historyLassUpdate.idUserCreate;
+      item['name'] =
+          UserViewModel().getUserByUser(historyLassUpdate.idUserCreate).name;
+      item['dateUpdate'] = historyLassUpdate.dateUpdate;
+      return item;
+    }
+    Order od =
+        order.firstWhere((order) => (order.id == idOrder), orElse: () => null);
+    if (od != null) {
+      item['content'] = od.content;
+      item['idUser'] = od.idUser;
+      item['name'] = UserViewModel().getUserByUser(od.idUser).name;
+      item['dateUpdate'] = od.dateCreate;
+    }
+    return item;
   }
 
   getColorItem(status) {

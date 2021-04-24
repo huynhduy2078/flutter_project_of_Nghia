@@ -17,7 +17,7 @@ abstract class BaseAuth {
 class Auth implements BaseAuth {
   final apiHelper = ApiHelper();
   var fakeUser = {
-    "userId": "1",
+    "userId": 5,
     "name": "Nguyễn Huỳnh Duy",
     "phone": "0976981420",
     "isOnline": true,

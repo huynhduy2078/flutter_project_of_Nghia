@@ -1,8 +1,10 @@
 import 'package:chat_messanger_ui/core/models/history_model.dart';
 import 'package:chat_messanger_ui/core/models/order_model.dart';
 import 'package:chat_messanger_ui/core/viewmodels/history_vm.dart';
+import 'package:chat_messanger_ui/core/viewmodels/order_vm.dart';
 import 'package:chat_messanger_ui/core/viewmodels/user_vm.dart';
 import 'package:chat_messanger_ui/widget/divider.dart';
+import 'package:chat_messanger_ui/widget/loader.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:chat_messanger_ui/utils/colors.dart';
@@ -10,16 +12,23 @@ import 'package:chat_messanger_ui/utils/margin.dart';
 import 'package:chat_messanger_ui/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
-class ContentOrder extends StatelessWidget {
+class ContentOrder extends StatefulWidget {
   final Order order;
   ContentOrder({Key key, this.order}) : super(key: key);
   double defaultSize = SizeConfig.defaultSize;
 
   @override
+  _ContentOrder createState() => _ContentOrder();
+}
+
+class _ContentOrder extends State<ContentOrder> {
+  @override
   Widget build(BuildContext context) {
     HistoryViewModel provider = context.watch<HistoryViewModel>();
-    UserViewModel providerUser = context.watch<UserViewModel>();
-    HistoryModel history = provider.getHistoryLassUpdate(order.id);
+    OrderViewModel providerOrder = context.watch<OrderViewModel>();
+    var data = providerOrder.getContentHistory(widget.order.id);
+
+    double defaultSize = SizeConfig.defaultSize;
     return Container(
         width: SizeConfig.screenWidth,
         color: white,
@@ -40,18 +49,18 @@ class ContentOrder extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Người tạo: ${providerUser.getUserByUser(history.idUserCreate).name}",
+                      "Người tạo: ${data['name']}",
                       style: TextStyle(color: black, fontSize: 13),
                     ),
                     Text(
-                      DateFormat('kk:mm dd/MM/yyyy').format(history.dateUpdate),
+                      DateFormat('kk:mm dd/MM/yyyy').format(data['dateUpdate']),
                       style: TextStyle(color: black, fontSize: 13),
                     ),
                   ],
                 ),
                 divider(text: "Nội dung:"),
                 Text(
-                  history.content,
+                  data['content'],
                   style: TextStyle(
                     color: black,
                     fontSize: 12,
@@ -79,7 +88,8 @@ class ContentOrder extends StatelessWidget {
                             fontSize: 13,
                           ),
                         ),
-                        onPressed: () => {})
+                        onPressed: () =>
+                            openAlertBox(context, data, widget.order))
                   ],
                 ),
               ],
@@ -87,4 +97,78 @@ class ContentOrder extends StatelessWidget {
           ),
         ));
   }
+}
+
+openAlertBox(context, data, order) {
+  double defaultSize = SizeConfig.defaultSize;
+  final controller = TextEditingController(text: data['content']);
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(12.0))),
+          content: Container(
+            width: SizeConfig.screenWidth * 0.6,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                Text(
+                  "Update order:",
+                  style: TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
+                ),
+                YMargin(defaultSize * 2),
+                Container(
+                  width: double.infinity,
+                  child: TextFormField(
+                    // ignore: missing_return
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "This field can't be left empty";
+                      }
+                      return null;
+                    },
+                    controller: controller,
+                    decoration: InputDecoration(
+                      hintText: "Update nội dung",
+                      border: InputBorder.none,
+                    ),
+                    maxLines: 10,
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    context.read<HistoryViewModel>().addHistorynewOrder(
+                        order.id, data['idUser'], controller.text);
+                    Navigator.of(context).pop();
+                  },
+                  child: Column(
+                    children: [
+                      YMargin(defaultSize),
+                      context.read<OrderViewModel>().isLoading
+                          ? Loader()
+                          : Container(
+                              width: double.infinity,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                  color: primary.withOpacity(0.8),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                child: Text(
+                                  "Update thông tin",
+                                  style: TextStyle(color: Colors.white),
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      });
 }

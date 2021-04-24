@@ -13,7 +13,6 @@ class Log {
 
   String debug(String tag, [dynamic payload]) {
     final output = generator('=', tag, payload);
-    print(output);
     return output;
   }
 

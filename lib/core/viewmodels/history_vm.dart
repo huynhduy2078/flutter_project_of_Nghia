@@ -1,7 +1,15 @@
+import 'dart:js';
+
 import 'package:chat_messanger_ui/core/models/history_model.dart';
+import 'package:chat_messanger_ui/core/models/order_model.dart';
+import 'package:chat_messanger_ui/core/viewmodels/user_vm.dart';
 import 'package:flutter/material.dart';
 
+import 'order_vm.dart';
+
 class HistoryViewModel extends ChangeNotifier {
+  final TextEditingController textSearch = new TextEditingController();
+
   bool _showHistory = false;
   bool get showHistory => _showHistory;
 
@@ -21,15 +29,12 @@ class HistoryViewModel extends ChangeNotifier {
   addHistorynewOrder(idOrder, idUserCreate, content) {
     try {
       if (true) {
-        if (historyData.length == 0) {
-          historyData = listHistory;
-        }
         historyData.insert(
             0,
             HistoryModel(
                 idOrder: idOrder,
                 idUserCreate: idUserCreate,
-                isCreate: true,
+                isCreate: false,
                 content: content,
                 dateUpdate: DateTime.now()));
       }
@@ -46,7 +51,7 @@ class HistoryViewModel extends ChangeNotifier {
   }
 
   HistoryModel getHistoryLassUpdate(idOrder) {
-    return listHistory.firstWhere((item) => (item.idOrder == idOrder),
+    return historyData.firstWhere((item) => (item.idOrder == idOrder),
         orElse: () => null);
   }
 
